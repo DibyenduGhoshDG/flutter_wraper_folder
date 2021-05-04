@@ -19,6 +19,8 @@ dependencies:
   cached_network_image: ^3.0.0
   google_fonts: 
   shared_preferences: 
+  # connection_status_bar: ^1.1.5
+  # connectivity_widget: ^0.1.7
 
 dev_dependencies:
   flutter_test:

@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil_init.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_wraper_folder/Controller/DemoController.dart';
+import 'package:flutter_wraper_folder/View/SigninSignUp/SplashScreen.dart';
+import 'package:flutter_wraper_folder/View/SigninSignUp/welcomeScreen.dart';
 import 'package:flutter_wraper_folder/util/sharePreference_instance.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'Controller/application_starter_controller.dart';
 import 'View/DashBoard/Dashboard.dart';
-import 'View/SigninSignUp/welcomeScreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +49,6 @@ class _MyAppState extends State<MyApp> {
   var InternetStatus = "Unknown";
   var contentmessage = "Unknown";
   final applicationStarterController = Get.put(ApplicationStarterController());
-
   @override
   void initState() {
     // checkConnection(context);
@@ -68,21 +67,21 @@ class _MyAppState extends State<MyApp> {
     var height = MediaQuery.of(context).size.height;
 
     return ScreenUtilInit(
-        designSize: Size(width, height),
-        allowFontScaling: false,
-        builder: () => Obx(() {
-          var applicationState = applicationStarterController.state.value;
-          // return Container();
-
-          if (applicationState == ApplicationState.LoggedIn) {
-            return Container();
-          } else if (applicationState == ApplicationState.LoggedOut) {
-            return Container();
-          } else {
-            return Container();
-          }
-        }),
-      );
+      designSize: Size(width, height),
+      allowFontScaling: false,
+      builder: () => Obx(() {
+        print('main.dart');
+        var applicationState = applicationStarterController.state.value;
+        // return Container();
+        if (applicationState == ApplicationState.LoggedIn) {
+          return Dashbord();
+        } else if (applicationState == ApplicationState.LoggedOut) {
+          return WelcomeScreen();
+        } else {
+          return SplashScreen();
+        }
+      }),
+    );
   }
 
 //   checkConnection(BuildContext context) async {
